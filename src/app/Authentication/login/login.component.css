@@ -50,3 +50,9 @@ button:disabled {
     display: flex;
     gap: 1rem;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px; /* Adjust the spacing as needed */
+}

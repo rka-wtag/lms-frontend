@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {NgIf} from "@angular/common";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-login',
@@ -32,6 +33,9 @@ export class LoginComponent {
             this.authService.onLogin(this.loginForm.value).subscribe({
                 next: () => {
                     this.router.navigate(['home']);
+                },
+                error: (err: HttpErrorResponse) => {
+                    this.handleError(err);
                 }
             });
         } else {
@@ -41,6 +45,13 @@ export class LoginComponent {
 
     goToRegistration() {
         this.router.navigate(['register'])
+    }
+
+    private handleError(err: any): void {
+        if (err.status === 'BAD_REQUEST') {
+            this.loginForm.setErrors({"badCredentials": true, "badCredentialsMessage": err.message});
+            console.log(this.loginForm.errors);
+        }
     }
 }
 
