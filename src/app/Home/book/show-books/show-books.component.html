@@ -1,0 +1,22 @@
+<div class="container">
+    <app-sidebar/>
+    <div class="book-list">
+        <div *ngFor="let book of books" class="book-row">
+            <div class="book-column">
+                <div class="book-title">{{ book.title }}</div>
+                <div class="book-details">
+                    <div><strong>Author:</strong> {{ book.author.firstName }}</div>
+                    <div><strong>Genres:</strong> {{ genresMap.get(book.id) }}</div>
+                    <div><strong>Publication Year:</strong> {{ book.publicationYear }}</div>
+                    <div><strong>Available Copies:</strong> {{ book.copiesAvailable }}</div>
+                </div>
+            </div>
+            <div class="button-column">
+                <mat-icon class="edit-button" (click)="editBook(book.id)">edit</mat-icon>
+                <mat-icon class="delete-button" (click)="deleteBook(book.id)">delete</mat-icon>
+<!--                <button class="edit-button" >Edit</button>-->
+<!--                <button class="delete-button" >Delete</button>-->
+            </div>
+        </div>
+    </div>
+</div>

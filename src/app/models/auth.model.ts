@@ -12,3 +12,44 @@ export interface ILoginResponse {
 export interface IRegistrationResponse {
     message: string
 }
+
+export interface IAuthorResponse {
+    id: number;
+    lastName: string;
+    firstName: string;
+    email: string;
+}
+
+export interface IGenreResponse {
+    id: number;
+    name: string;
+}
+
+export interface IBookResponse {
+    id: number;
+    title: string;
+    publicationYear: number;
+    copiesAvailable: number;
+    author: {
+        id: number;
+        lastName: string;
+        firstName: string;
+        email: string;
+    };
+    genres: IGenreResponse[];
+}
+
+export interface IBookRequest {
+    title: string;
+    publicationYear: number;
+    copiesAvailable: number;
+    authorId: number;
+    genreIds: number[];
+}
+
+export interface Book {
+    id: number;
+    title: string;
+    author: IAuthorResponse;
+    genres: IGenreResponse[];
+}
