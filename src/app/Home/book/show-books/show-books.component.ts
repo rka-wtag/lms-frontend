@@ -36,8 +36,8 @@ export class ShowBooksComponent {
         })
       },
       error: (err) => {
-        console.log(err);
-        this.tokenService.removeToken();
+        //error from backend
+        //currently facing problem getting errors from backend
       }
     })
   }
