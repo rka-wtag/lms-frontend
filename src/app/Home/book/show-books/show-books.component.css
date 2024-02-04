@@ -54,15 +54,16 @@
 }
 
 .edit-button {
+    text-align: center;
     font-size: xx-large;
     color: #939494;
 }
 .edit-button:hover {
-    background-color: #8ebe8f;
+    background-color: #e0d3d3;
 }
 
 .delete-button:hover {
-    background-color: #cb0707;
+    background-color: #e0d3d3;
 }
 
 .delete-button {
