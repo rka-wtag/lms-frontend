@@ -6,6 +6,12 @@ import {Router} from "@angular/router";
 import {TokenService} from "../../../services/token.service";
 import {SidebarComponent} from "../../sidebar/sidebar.component";
 import {MatIcon} from "@angular/material/icon";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatDialog, MatDialogContent, MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {AddEditBookComponent} from "../add-edit-book/add-edit-book.component";
 
 @Component({
   selector: 'app-show-books',
@@ -13,7 +19,16 @@ import {MatIcon} from "@angular/material/icon";
   imports: [
     NgForOf,
     SidebarComponent,
-    MatIcon
+    MatIcon,
+    MatIconButton,
+    MatButton,
+    FormsModule,
+    MatCheckbox,
+    MatDialogContent,
+    MatFormField,
+    MatLabel,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   templateUrl: './show-books.component.html',
   styleUrl: './show-books.component.css'
@@ -22,7 +37,7 @@ export class ShowBooksComponent {
   public books: IBookResponse[] = [];
   public genres: String;
   public genresMap: Map<number, String> = new Map<number, String>();
-  constructor(private bookSevice: BookService, private router: Router, private tokenService: TokenService) {
+  constructor(private bookSevice: BookService, private router: Router, private tokenService: TokenService, public dialog: MatDialog) {
     this.fetchBooks();
   }
 
@@ -30,6 +45,7 @@ export class ShowBooksComponent {
   fetchBooks(): void {
     this.bookSevice.fetchBooks().subscribe({
       next: (res) => {
+        this.books = [];
         res.forEach(book => {
           this.books.push(book);
           this.genresMap.set(book.id, book.genres.map(genre => genre.name).join(', '));
@@ -44,8 +60,14 @@ export class ShowBooksComponent {
 
 
   editBook(id: number) {
+    this.dialog.open(AddEditBookComponent);
   }
 
   deleteBook(id: number) {
+    this.bookSevice.deleteBook(id).subscribe({
+      next: () => {
+        this.fetchBooks();
+      }
+    })
   }
 }

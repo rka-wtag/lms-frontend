@@ -1,0 +1,48 @@
+
+:host {
+    display: block;
+}
+
+.content {
+    display: block;
+}
+
+.button {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+}
+
+.mat-dialog-container {
+    max-width: 400px;
+    padding: 16px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.field {
+    flex: 1;
+    margin-right: 16px;
+}
+
+button {
+    margin-top: 16px;
+}
+
+mat-select {
+    width: 100%;
+}
+

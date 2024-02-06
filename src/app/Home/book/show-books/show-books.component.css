@@ -1,6 +1,10 @@
-/* show-books.component.css */
 
 .container {
+    display: flex;
+    position: static;
+}
+
+.book-wrapper {
     display: flex;
 }
 
@@ -16,12 +20,12 @@
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%; /* Ensure each row takes up the full width */
+    width: 100%;
     box-sizing: border-box;
 }
 
 .book-column {
-    flex: 1; /* Take up available space */
+    flex: 1;
 }
 
 .book-title {
@@ -49,7 +53,7 @@
     padding: 5px 8px;
     cursor: pointer;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     transition: background-color 0.3s;
 }
 
