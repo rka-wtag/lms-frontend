@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {apiEndpoint} from "../../constants/constants";
-import {catchError, map, throwError} from "rxjs";
-import {IBookResponse} from "../../models/auth.model";
+import {BehaviorSubject, catchError, map, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
+    loadBook: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+        false
+    );
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +25,17 @@ export class BookService {
         );
   }
 
+  updateBook(id: number, updatedBook: Object){
+      return this.http.put(apiEndpoint.BookEndpoint.getUpdateBook(id), updatedBook);
+  }
+
+  fetchBook(id: number) {
+      return this.http.get(apiEndpoint.BookEndpoint.getBook(id))
+          .pipe(
+              catchError(err => throwError(() => err))
+          )
+  }
+
   deleteBook(id: number) {
       return this.http.delete(apiEndpoint.BookEndpoint.getDeleteBook(id))
           .pipe(
@@ -30,4 +43,7 @@ export class BookService {
           )
   }
 
+    saveBook(bookTobeSaved) {
+        return this.http.post<Object>(apiEndpoint.BookEndpoint.book, bookTobeSaved);
+    }
 }

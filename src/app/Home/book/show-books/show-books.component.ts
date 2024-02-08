@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {BookService} from "../../../services/Book/book.service";
 import {IBookResponse} from "../../../models/auth.model";
 import {NgForOf} from "@angular/common";
-import {Router} from "@angular/router";
-import {TokenService} from "../../../services/token.service";
 import {SidebarComponent} from "../../sidebar/sidebar.component";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
@@ -14,60 +12,74 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {AddEditBookComponent} from "../add-edit-book/add-edit-book.component";
 
 @Component({
-  selector: 'app-show-books',
-  standalone: true,
-  imports: [
-    NgForOf,
-    SidebarComponent,
-    MatIcon,
-    MatIconButton,
-    MatButton,
-    FormsModule,
-    MatCheckbox,
-    MatDialogContent,
-    MatFormField,
-    MatLabel,
-    ReactiveFormsModule,
-    MatDialogModule
-  ],
-  templateUrl: './show-books.component.html',
-  styleUrl: './show-books.component.css'
+    selector: 'app-show-books',
+    standalone: true,
+    imports: [
+        NgForOf,
+        SidebarComponent,
+        MatIcon,
+        MatIconButton,
+        MatButton,
+        FormsModule,
+        MatCheckbox,
+        MatDialogContent,
+        MatFormField,
+        MatLabel,
+        ReactiveFormsModule,
+        MatDialogModule
+    ],
+    templateUrl: './show-books.component.html',
+    styleUrl: './show-books.component.css'
 })
 export class ShowBooksComponent {
-  public books: IBookResponse[] = [];
-  public genres: String;
-  public genresMap: Map<number, String> = new Map<number, String>();
-  constructor(private bookSevice: BookService, private router: Router, private tokenService: TokenService, public dialog: MatDialog) {
-    this.fetchBooks();
-  }
+    public books: IBookResponse[] = [];
+    public genres: String;
+    public genresMap: Map<number, String> = new Map<number, String>();
 
-
-  fetchBooks(): void {
-    this.bookSevice.fetchBooks().subscribe({
-      next: (res) => {
-        this.books = [];
-        res.forEach(book => {
-          this.books.push(book);
-          this.genresMap.set(book.id, book.genres.map(genre => genre.name).join(', '));
-        })
-      },
-      error: (err) => {
-        //error from backend
-        //currently facing problem getting errors from backend
-      }
-    })
-  }
-
-
-  editBook(id: number) {
-    this.dialog.open(AddEditBookComponent);
-  }
-
-  deleteBook(id: number) {
-    this.bookSevice.deleteBook(id).subscribe({
-      next: () => {
+    constructor(private bookService: BookService, public dialog: MatDialog) {
         this.fetchBooks();
-      }
-    })
-  }
+    }
+
+    fetchBooks(): void {
+        this.bookService.fetchBooks().subscribe({
+            next: (res) => {
+                this.books = [];
+                res.forEach(book => {
+                    this.books.push(book);
+                    this.genresMap.set(book.id, book.genres.map(genre => genre.name).join(', '));
+                })
+            },
+            error: (err) => {
+                //error from backend
+                //currently facing problem getting errors from backend
+            }
+        })
+    }
+
+
+    openEditBookDialog(id: number) {
+        this.bookService.fetchBook(id).subscribe({
+            next: (res: IBookResponse) => {
+                this.dialog.open(AddEditBookComponent, {
+                    data: {
+                        book: res
+                    }
+                });
+                this.bookService.loadBook.subscribe({
+                    next: (val) => {
+                        this.fetchBooks();
+                    }
+                })
+            }
+        })
+    }
+
+    deleteBook(id: number) {
+        this.bookService.deleteBook(id).subscribe({
+            next: () => {
+                this.fetchBooks();
+            }
+        })
+    }
+
 }
