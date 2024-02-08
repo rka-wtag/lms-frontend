@@ -50,8 +50,7 @@ export class ShowBooksComponent {
                 })
             },
             error: (err) => {
-                //error from backend
-                //currently facing problem getting errors from backend
+                this.books = [];
             }
         })
     }
@@ -78,6 +77,9 @@ export class ShowBooksComponent {
         this.bookService.deleteBook(id).subscribe({
             next: () => {
                 this.fetchBooks();
+            },
+            error: () => {
+                this.books = [];
             }
         })
     }
