@@ -38,7 +38,11 @@ export class NavComponent {
     }
 
     saveUser() {
-      this.matDialog.open(AddEditBookComponent);
+      this.matDialog.open(AddEditBookComponent, {
+          data: {
+              book: null
+          }
+      });
     }
 
 

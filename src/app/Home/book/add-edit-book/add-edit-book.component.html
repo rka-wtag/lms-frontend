@@ -1,8 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form">
     <div class="content">
         <div class="row">
             <mat-form-field>
-                <input matInput placeholder="Book Name" formControlName="bookName">
+                <input matInput placeholder="Book Name" formControlName="title">
             </mat-form-field>
 
             <mat-form-field>
@@ -11,15 +11,14 @@
         </div>
 
         <div class="row">
-
             <mat-form-field>
                 <input matInput placeholder="Copies Available" formControlName="copiesAvailable">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Author</mat-label>
-                <mat-select formControlName="author">
-                    <mat-option *ngFor="let author of authors" [value]="author">{{ author }}</mat-option>
+                <mat-select formControlName="authorId">
+                    <mat-option *ngFor="let author of authorResponse" [value]="author.id">{{ author.firstName }} {{author.lastName}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -27,15 +26,15 @@
         <div class="row">
             <mat-form-field>
                 <mat-label>Genres</mat-label>
-                <mat-select formControlName="genre" multiple>
-                    <mat-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</mat-option>
+                <mat-select formControlName="genreIds" multiple>
+                    <mat-option *ngFor="let genre of genresResponse" [value]="genre.id">{{ genre.name }}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
 
         <div class="button">
-            <button mat-raised-button color="primary" type="submit">Submit</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
             <button mat-raised-button (click)="closepopup()" color="warn">Cancel</button>
 
         </div>

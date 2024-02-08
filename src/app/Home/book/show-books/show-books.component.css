@@ -6,11 +6,14 @@
 
 .book-wrapper {
     display: flex;
+    width: 100%;
 }
 
 .book-list {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+    /*height: 10rem;*/
 }
 
 .book-row {

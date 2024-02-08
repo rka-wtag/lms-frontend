@@ -12,9 +12,14 @@ export const apiEndpoint = {
     },
     BookEndpoint: {
         book: `${apiUrl}/books`,
-        getDeleteBook: (id: number) => `${apiUrl}/books/${id}`
+        getDeleteBook: (id: number) => `${apiUrl}/books/${id}`,
+        getBook: (id: number) => `${apiUrl}/books/${id}`,
+        getUpdateBook: (id: number) => `${apiUrl}/books/${id}`
     },
     GenreEndpoint: {
         genre: `${apiUrl}/genres`
+    },
+    AuthorEndpoint: {
+        author: `${apiUrl}/authors`
     }
 };
