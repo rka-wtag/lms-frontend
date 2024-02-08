@@ -6,7 +6,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
-import {GenreService} from "../../../services/genre/genre.service";
 import {IGenreResponse} from "../../../models/auth.model";
 
 @Component({
@@ -33,11 +32,11 @@ import {IGenreResponse} from "../../../models/auth.model";
 })
 export class AddEditBookComponent {
     authors = ['Author1', 'Author2', 'Author3'];
-    genres = [];
+    genres = ['genre1', 'genre2'];
     genresResponse: IGenreResponse[] = [];
     form: FormGroup;
 
-    constructor(private ref: MatDialogRef<AddEditBookComponent>, private fb: FormBuilder, private genreService: GenreService) {
+    constructor(private ref: MatDialogRef<AddEditBookComponent>, private fb: FormBuilder) {
         this.form = this.fb.group({
             bookName: ['', Validators.required],
             publicationYear: ['', Validators.required],
@@ -58,14 +57,5 @@ export class AddEditBookComponent {
     }
 
     private fetchGenres() {
-        this.genreService.fetchGenres().subscribe({
-            next: (res) => {
-                this.genresResponse = res;
-                this.genres = res.map(genre => genre.name);
-            },
-            error: (res) => {
-                this.genres = [];
-            }
-        })
     }
 }
