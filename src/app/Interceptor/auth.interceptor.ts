@@ -28,6 +28,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           tokenService.removeToken();
           router.navigate(['login']);
         }
+        tokenService.removeToken();
         const error = e.error?.error?.message || e.statusText;
         return throwError(() => error);
       })
