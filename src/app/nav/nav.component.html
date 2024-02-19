@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand"> Library management</span>
+    <span class="spacer"></span>
+    <div>
+        @if (this.isAuthenticated$| async) {
+            <button mat-button routerLink="/logout" routerLinkActive="active" (click)="onLogout()">Logout</button>
+        } @else {
+            <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
+        }
+    </div>
+</mat-toolbar>
