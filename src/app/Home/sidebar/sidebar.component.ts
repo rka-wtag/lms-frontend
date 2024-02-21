@@ -18,3 +18,4 @@ export class SidebarComponent {
   showIssuedBooks = Urls.showIssuedBooks;
   constructor(private router: Router) {}
 }
+
