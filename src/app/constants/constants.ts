@@ -11,3 +11,10 @@ export const apiEndpoint = {
         logout: `${apiUrl}/logout`
     }
 };
+
+export const Urls = {
+    showBooks: "/showBooks",
+    showGenres: "/showGenres",
+    showAuthors: "/showAuthors",
+    showIssuedBooks: "/showIssuedBooks",
+}
