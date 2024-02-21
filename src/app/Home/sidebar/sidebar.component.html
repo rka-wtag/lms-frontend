@@ -1,7 +1,7 @@
-
 <div class="sidebar">
-    <div class="sidebar-section" (click)="navigateTo('showBooks')">Books</div>
-    <div class="sidebar-section" (click)="navigateTo('genres')">Genres</div>
-    <div class="sidebar-section" (click)="navigateTo('authors')">Authors</div>
-    <div class="sidebar-section" (click)="navigateTo('issued-books')">Issued Books</div>
+    <a class="sidebar-section" [routerLink]="showBooks">Books</a>
+    <a class="sidebar-section" [routerLink]="showGenres">Genres</a>
+    <a class="sidebar-section" [routerLink]="showAuthors">Authors</a>
+    <a class="sidebar-section" [routerLink]="showIssuedBooks">Borrowed Books</a>
 </div>
+
