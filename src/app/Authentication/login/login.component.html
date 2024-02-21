@@ -13,7 +13,7 @@
         </div>
 
         <div class="button-wrapper">
-            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+            <button type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()">Login</button>
             <button type="button" (click)="goToRegistration()">Register</button>
         </div>
         <span *ngIf="loginForm.hasError('badCredentials')" class="error-message">Invalid Credentials</span>

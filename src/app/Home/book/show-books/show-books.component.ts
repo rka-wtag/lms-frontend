@@ -36,8 +36,6 @@ export class ShowBooksComponent {
         })
       },
       error: (err) => {
-        //error from backend
-        //currently facing problem getting errors from backend
       }
     })
   }
@@ -49,3 +47,4 @@ export class ShowBooksComponent {
   deleteBook(id: number) {
   }
 }
+
