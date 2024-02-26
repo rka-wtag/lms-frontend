@@ -36,15 +36,9 @@ export class ShowBooksComponent {
         })
       },
       error: (err) => {
+        alert(err.message)
       }
     })
-  }
-
-
-  editBook(id: number) {
-  }
-
-  deleteBook(id: number) {
   }
 }
 
