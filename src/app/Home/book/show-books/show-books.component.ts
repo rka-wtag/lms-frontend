@@ -3,9 +3,10 @@ import {BookService} from "../../../services/Book/book.service";
 import {IBookResponse} from "../../../models/auth.model";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
-import {TokenService} from "../../../services/token.service";
 import {SidebarComponent} from "../../sidebar/sidebar.component";
 import {MatIcon} from "@angular/material/icon";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-show-books',
@@ -22,7 +23,7 @@ export class ShowBooksComponent {
   public books: IBookResponse[] = [];
   public genres: String;
   public genresMap: Map<number, String> = new Map<number, String>();
-  constructor(private bookSevice: BookService, private router: Router, private tokenService: TokenService) {
+  constructor(private bookSevice: BookService, private router: Router, private toaster: ToastrService) {
     this.fetchBooks();
   }
 
@@ -35,8 +36,8 @@ export class ShowBooksComponent {
           this.genresMap.set(book.id, book.genres.map(genre => genre.name).join(', '));
         })
       },
-      error: (err) => {
-        alert(err.message)
+      error: (err: HttpErrorResponse) => {
+        this.toaster.error(err.message);
       }
     })
   }
