@@ -44,7 +44,6 @@ export class AddEditBookComponent {
             author: ['', Validators.required],
             genre: ['', Validators.required],
         });
-        this.fetchGenres();
     }
 
 
@@ -56,6 +55,5 @@ export class AddEditBookComponent {
         this.ref.close();
     }
 
-    private fetchGenres() {
-    }
 }
+

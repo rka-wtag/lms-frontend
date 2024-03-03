@@ -38,7 +38,7 @@ export class ShowBooksComponent {
   public books: IBookResponse[] = [];
   public genres: String;
   public genresMap: Map<number, String> = new Map<number, String>();
-  constructor(private bookSevice: BookService, private router: Router, private toaster: ToastrService) {
+  constructor(private bookSevice: BookService, private router: Router, private toaster: ToastrService, private dialog: MatDialog) {
     this.fetchBooks();
   }
 
@@ -67,6 +67,9 @@ export class ShowBooksComponent {
     this.bookSevice.deleteBook(id).subscribe({
       next: () => {
         this.fetchBooks();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.toaster.error(err.message);
       }
     })
   }

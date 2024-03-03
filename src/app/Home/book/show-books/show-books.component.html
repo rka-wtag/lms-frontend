@@ -12,8 +12,8 @@
                 </div>
             </div>
             <div class="button-column">
-                <mat-icon class="edit-button">edit</mat-icon>
-                <mat-icon class="delete-button">delete</mat-icon>
+                <mat-icon class="edit-button" (click)="editBook(book.id)">edit</mat-icon>
+                <mat-icon class="delete-button" (click)="deleteBook(book.id)">delete</mat-icon>
             </div>
         </div>
     </div>
