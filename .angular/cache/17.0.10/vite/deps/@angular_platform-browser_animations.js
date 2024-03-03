@@ -1,16 +1,16 @@
 import {
+  BrowserModule,
+  DomRendererFactory2
+} from "./chunk-THFGBR4U.js";
+import "./chunk-PY3VLUSX.js";
+import {
   AUTO_STYLE,
   AnimationGroupPlayer,
   NoopAnimationPlayer,
   sequence,
   style,
   ɵPRE_STYLE
-} from "./chunk-ITXLOEZZ.js";
-import {
-  BrowserModule,
-  DomRendererFactory2
-} from "./chunk-THFGBR4U.js";
-import "./chunk-PY3VLUSX.js";
+} from "./chunk-RYDYF7KU.js";
 import {
   DOCUMENT
 } from "./chunk-7QCV2LIA.js";
