@@ -9,6 +9,9 @@ export const apiEndpoint = {
         login: `${apiUrl}/login`,
         registration: `${apiUrl}/registration`,
         logout: `${apiUrl}/logout`
+    },
+    BookEndpoint: {
+        book: `${apiUrl}/books`
     }
 };
 

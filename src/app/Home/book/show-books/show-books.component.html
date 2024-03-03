@@ -1,0 +1,21 @@
+<div class="container">
+    <app-sidebar/>
+    <div class="book-list">
+        <div *ngFor="let book of books" class="book-row">
+            <div class="book-column">
+                <div class="book-title">{{ book.title }}</div>
+                <div class="book-details">
+                    <div><span class="strong-text">Author:</span> {{ book.author.firstName }}</div>
+                    <div><span class="strong-text">Genres:</span> {{ genresMap.get(book.id) }}</div>
+                    <div><span class="strong-text">Publication Year:</span> {{ book.publicationYear }}</div>
+                    <div><span class="strong-text">Available Copies:</span> {{ book.copiesAvailable }}</div>
+                </div>
+            </div>
+            <div class="button-column">
+                <mat-icon class="edit-button">edit</mat-icon>
+                <mat-icon class="delete-button">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+

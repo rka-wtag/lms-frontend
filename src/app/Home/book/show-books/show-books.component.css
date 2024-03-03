@@ -1,0 +1,78 @@
+
+.container {
+    display: flex;
+}
+
+.book-list {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.book-row {
+    display: flex;
+    align-items: flex-start;
+    margin: 0.62rem 0;
+    padding: 0.94rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3125rem;
+    width: 100%;
+    box-sizisng: border-box;
+}
+
+.book-column {
+    flex: 1;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.625rem;
+}
+
+.book-details {
+    color: #555;
+}
+
+.button-column {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit-button,
+.delete-button {
+    margin-top: 0.625rem;
+    padding: 0.3125rem 0.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: .3125rem;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    text-align: center;
+    font-size: xx-large;
+    color: #939494;
+}
+
+.edit-button:hover {
+    background-color: #e0d3d3;
+}
+
+.delete-button:hover {
+    background-color: #e0d3d3;
+}
+
+.delete-button {
+    font-size: xx-large;
+    color: #c50a0a;
+}
+
+.strong-text {
+    font-weight: bold;
+}
+

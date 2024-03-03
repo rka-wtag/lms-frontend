@@ -4,6 +4,7 @@ import {RegistrationComponent} from "./Authentication/registration/registration.
 import {HomeComponent} from "./Home/home/home.component";
 import {guestGuard} from "./guards/guest.guard";
 import {authGuard} from "./guards/auth.guard";
+import {ShowBooksComponent} from "./Home/book/show-books/show-books.component";
 
 export const routes: Routes = [
     {
@@ -22,8 +23,14 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'showBooks',
+        component: ShowBooksComponent,
+        canActivate: [authGuard]
+    },
+    {
         path: '',
         component: LoginComponent,
         pathMatch: 'full'
     }
 ];
+
