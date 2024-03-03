@@ -3,9 +3,10 @@ import {BookService} from "../../../services/Book/book.service";
 import {IBookResponse} from "../../../models/auth.model";
 import {NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
-import {TokenService} from "../../../services/token.service";
 import {SidebarComponent} from "../../sidebar/sidebar.component";
 import {MatIcon} from "@angular/material/icon";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatDialog, MatDialogContent, MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -37,7 +38,7 @@ export class ShowBooksComponent {
   public books: IBookResponse[] = [];
   public genres: String;
   public genresMap: Map<number, String> = new Map<number, String>();
-  constructor(private bookSevice: BookService, private router: Router, private tokenService: TokenService, public dialog: MatDialog) {
+  constructor(private bookSevice: BookService, private router: Router, private toaster: ToastrService) {
     this.fetchBooks();
   }
 
@@ -51,9 +52,8 @@ export class ShowBooksComponent {
           this.genresMap.set(book.id, book.genres.map(genre => genre.name).join(', '));
         })
       },
-      error: (err) => {
-        //error from backend
-        //currently facing problem getting errors from backend
+      error: (err: HttpErrorResponse) => {
+        this.toaster.error(err.message);
       }
     })
   }

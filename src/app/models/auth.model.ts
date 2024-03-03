@@ -53,3 +53,4 @@ export interface Book {
     author: IAuthorResponse;
     genres: IGenreResponse[];
 }
+

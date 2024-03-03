@@ -18,3 +18,10 @@ export const apiEndpoint = {
         genre: `${apiUrl}/genres`
     }
 };
+
+export const Urls = {
+    showBooks: "/showBooks",
+    showGenres: "/showGenres",
+    showAuthors: "/showAuthors",
+    showIssuedBooks: "/showIssuedBooks",
+}
