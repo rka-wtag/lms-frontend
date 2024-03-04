@@ -1,7 +1,3 @@
-/.angular
-/node_modules
-/.idea
-
 /dist
 /tmp
 /out-tsc
