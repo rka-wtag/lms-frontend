@@ -11,7 +11,11 @@ export const apiEndpoint = {
         logout: `${apiUrl}/logout`
     },
     BookEndpoint: {
-        book: `${apiUrl}/books`
+        book: `${apiUrl}/books`,
+        getDeleteBook: (id: number) => `${apiUrl}/books/${id}`
+    },
+    GenreEndpoint: {
+        genre: `${apiUrl}/genres`
     }
 };
 

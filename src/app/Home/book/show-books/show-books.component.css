@@ -1,11 +1,15 @@
 
 .container {
     display: flex;
+    position: static;
+}
+
+.book-wrapper {
+    display: flex;
 }
 
 .book-list {
     display: flex;
-    flex: 1;
     flex-wrap: wrap;
 }
 
@@ -17,7 +21,7 @@
     border: 1px solid #ccc;
     border-radius: 0.3125rem;
     width: 100%;
-    box-sizisng: border-box;
+    box-sizing: border-box;
 }
 
 .book-column {
