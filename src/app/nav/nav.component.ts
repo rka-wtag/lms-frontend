@@ -37,10 +37,9 @@ export class NavComponent {
         this.authService.onLogout();
     }
 
-    saveUser() {
+    saveBook() {
       this.matDialog.open(AddEditBookComponent);
     }
-
 
 }
 

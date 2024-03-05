@@ -46,7 +46,6 @@ export class AddEditBookComponent {
         });
     }
 
-
     closepopup() {
         this.ref.close('Closed using function');
     }
