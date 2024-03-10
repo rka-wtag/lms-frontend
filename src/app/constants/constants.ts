@@ -25,3 +25,7 @@ export const Urls = {
     showAuthors: "/showAuthors",
     showIssuedBooks: "/showIssuedBooks",
 }
+
+export const regexPattern = {
+    number: {pattern: `/^[1-9]\\d*$/`}
+};

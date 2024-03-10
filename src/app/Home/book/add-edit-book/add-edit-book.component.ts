@@ -7,6 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {IGenreResponse} from "../../../models/auth.model";
+import {regexPattern} from "../../../constants/constants";
 
 @Component({
     selector: 'app-add-edit-book',
@@ -40,7 +41,7 @@ export class AddEditBookComponent {
         this.form = this.fb.group({
             bookName: ['', Validators.required],
             publicationYear: ['', Validators.required],
-            copiesAvailable: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+            copiesAvailable: ['', [Validators.required, regexPattern.number]],
             author: ['', Validators.required],
             genre: ['', Validators.required],
         });
