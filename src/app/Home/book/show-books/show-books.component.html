@@ -4,26 +4,49 @@
     </div>
     <div class="book-wrapper">
         <div class="book-list">
-            <div *ngFor="let book of books" class="book-row">
-                <div class="book-column">
-                    <div class="book-title">{{ book.title }}</div>
-                    <div class="book-details">
-                        <div><strong>Author:</strong> {{ book.author.firstName }}</div>
-                        <div><strong>Genres:</strong> {{ genresMap.get(book.id) }}</div>
-                        <div><strong>Publication Year:</strong> {{ book.publicationYear }}</div>
-                        <div><strong>Available Copies:</strong> {{ book.copiesAvailable }}</div>
+            <ng-container *ngIf="hasBooks; else noBooks">
+                <div *ngFor="let book of books" class="book-row">
+                    <div class="book-column">
+                        <div class="book-title">{{ book.title }}</div>
+                        <div class="book-details">
+                            <div><strong>Author:</strong> {{ book.author.firstName }} {{ book.author.lastName }}</div>
+                            <div><strong>Genres:</strong> {{ genresMap.get(book.id) }}</div>
+                            <div><strong>Publication Year:</strong> {{ book.publicationYear }}</div>
+                            <div><strong>Available Copies:</strong> {{ book.copiesAvailable }}</div>
+                        </div>
+                    </div>
+                    <div class="button-column">
+                        <button mat-icon-button matTooltip="Edit" matTooltipPosition="above" color="basic"
+                                class="edit-button" (click)="openEditBookDialog(book.id)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Delete" matTooltipPosition="above" color="primary"
+                                class="delete-button" color="warn" (click)="deleteBook(book.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Borrow book" matTooltipPosition="above" class="issue-button"
+                                color="primary" (click)="issueBook(book.id)">
+                            <mat-icon>library_books</mat-icon>
+                        </button>
                     </div>
                 </div>
-                <div class="button-column">
-                    <button class="edit-button" (click)="openEditBookDialog(book.id)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-fab color="primary" class="delete-button" color="warn" (click)="deleteBook(book.id)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </div>
+                <mat-paginator
+                        class="paginator"
+                        (page)="handlePageEvent($event)"
+                        [length]="length"
+                        [pageSize]="itemPerPage"
+                        [pageSizeOptions]="pageSizeOptions"
+                        [pageIndex]="currentPage"
+                        aria-label="Select page">
+                </mat-paginator>
+            </ng-container>
         </div>
+        <ng-template #noBooks>
+            <div class="centered-message">
+                <div class="message-box">
+                    Apologies, Our library currently has no books available. Please visit us again soon</div>
+            </div>
+        </ng-template>
     </div>
 
 </div>

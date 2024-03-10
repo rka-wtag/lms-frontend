@@ -7,7 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {GenreService} from "../../../services/genre/genre.service";
-import {IAuthorResponse, IGenreResponse} from "../../../models/auth.model";
+import {IAuthorResponse, IGenreResponse, PaginationInput} from "../../../models/auth.model";
 import {AuthorService} from "../../../services/author/author.service";
 import {BookService} from "../../../services/Book/book.service";
 
@@ -29,7 +29,7 @@ import {BookService} from "../../../services/Book/book.service";
     providers: [
         {
             provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: {appearance: 'fill'}, // Set your desired default options here
+            useValue: {appearance: 'fill'},
         },
     ],
     templateUrl: './add-edit-book.component.html',
@@ -56,7 +56,7 @@ export class AddEditBookComponent implements OnInit {
         this.currentBookId = data.book ? data.book.id : null;
         this.form = this.fb.group({
             title: [data.book ? data.book.title : '', Validators.required],
-            publicationYear: [data.book ? data.book.publicationYear : '', Validators.required],
+            publicationYear: [data.book ? data.book.publicationYear : '', [Validators.required, Validators.pattern(/^[1-9]\d*$/), Validators.min(1500)]],
             copiesAvailable: [data.book ? data.book.copiesAvailable : '', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
             authorId: [data.book ? data.book.author.id : '', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
             genreIds: [data.book ? data.book.genres.map(genre => genre.id) : '', Validators.required]
@@ -74,6 +74,16 @@ export class AddEditBookComponent implements OnInit {
         this.ref.close();
     }
 
+    getPaginationInput() {
+        const paginationInput = {
+            sortingField: 'id',
+            pageNo: 0,
+            pageSize: 30,
+        } as PaginationInput;
+
+        return paginationInput;
+    }
+
     onSubmit() {
         if(this.updateBook) {
             this.bookService.updateBook(this.currentBookId, this.form.value).subscribe({
@@ -87,14 +97,14 @@ export class AddEditBookComponent implements OnInit {
         this.bookService.saveBook(this.form.value).subscribe({
             next: () => {
                 this.bookService.loadBook.next(true);
+                this.ref.close();
             }
         });
-        this.ref.close();
 
     }
 
     private fetchGenres() {
-        this.genreService.fetchGenres().subscribe({
+        this.genreService.fetchGenres(this.getPaginationInput()).subscribe({
             next: (res) => {
                 this.genresResponse = res;
                 this.genres = res.map(genre => genre.name);
@@ -106,7 +116,7 @@ export class AddEditBookComponent implements OnInit {
     }
 
     private fetchAuthors() {
-        this.authorService.fetchAuthors().subscribe({
+        this.authorService.fetchAuthors(this.getPaginationInput()).subscribe({
             next: (res) => {
                 this.authorResponse = res;
                 this.authors = res.map((author: IAuthorResponse): string => `${author.firstName} ${author.lastName}`);

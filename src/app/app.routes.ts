@@ -6,6 +6,9 @@ import {guestGuard} from "./guards/guest.guard";
 import {authGuard} from "./guards/auth.guard";
 import {ShowBooksComponent} from "./Home/book/show-books/show-books.component";
 import {AddEditBookComponent} from "./Home/book/add-edit-book/add-edit-book.component";
+import {ShowGenreComponent} from "./Home/genre/show-genre/show-genre.component";
+import {ShowAuthorsComponent} from "./Home/author/show-authors/show-authors.component";
+import {IssuedBookComponent} from "./Home/issud-books/issued-book/issued-book.component";
 
 export const routes: Routes = [
     {
@@ -20,12 +23,27 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent,
+        component: ShowBooksComponent,
         canActivate: [authGuard]
     },
     {
         path: 'showBooks',
         component: ShowBooksComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'showGenres',
+        component: ShowGenreComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'showAuthors',
+        component: ShowAuthorsComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'issuedBooks',
+        component: IssuedBookComponent,
         canActivate: [authGuard]
     },
     {

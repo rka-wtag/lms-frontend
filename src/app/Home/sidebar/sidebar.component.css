@@ -14,6 +14,11 @@
 }
 
 .sidebar-section {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     padding: 0.625rem;
     margin-bottom: 0.625rem;

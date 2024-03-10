@@ -20,6 +20,16 @@ export interface IAuthorResponse {
     email: string;
 }
 
+export interface IssueBookRequest {
+    bookId: number;
+}
+
+export interface IAuthorRequest {
+    lastName: string;
+    firstName: string;
+    email: string;
+}
+
 export interface IGenreResponse {
     id: number;
     name: string;
@@ -52,4 +62,10 @@ export interface Book {
     title: string;
     author: IAuthorResponse;
     genres: IGenreResponse[];
+}
+
+export interface PaginationInput {
+    pageNo: number,
+    pageSize: number,
+    sortingField: string
 }

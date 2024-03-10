@@ -8,6 +8,8 @@ import {CommonModule, NgIf} from "@angular/common";
 import { BehaviorSubject } from 'rxjs';
 import {MatDialog} from "@angular/material/dialog";
 import {AddEditBookComponent} from "../Home/book/add-edit-book/add-edit-book.component";
+import {AddEditGenreComponent} from "../Home/genre/add-edit-genre/add-edit-genre.component";
+import {AddEditAuthorComponent} from "../Home/author/add-edit-author/add-edit-author.component";
 
 @Component({
     selector: 'app-nav',
@@ -41,6 +43,21 @@ export class NavComponent {
       this.matDialog.open(AddEditBookComponent, {
           data: {
               book: null
+          }
+      });
+    }
+
+    saveGenre(): void {
+      this.matDialog.open(AddEditGenreComponent, {
+          data: {
+              genre: null
+          }
+      });
+    }
+    saveAuthor(): void {
+      this.matDialog.open(AddEditAuthorComponent, {
+          data: {
+              author: null
           }
       });
     }

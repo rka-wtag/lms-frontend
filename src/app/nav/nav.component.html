@@ -4,7 +4,9 @@
     <div>
         @if (this.isAuthenticated$| async) {
             <button mat-raised-button color="basic" (click)="saveUser()">Add Book</button>
-            <button mat-button routerLink="/logout" routerLinkActive="active" (click)="onLogout()">Logout</button>
+            <button mat-raised-button color="basic" (click)="saveGenre()">Add Genre</button>
+            <button mat-raised-button color="basic" (click)="saveAuthor()">Add Author</button>
+            <button mat-raised-button color="warn" routerLink="/logout" routerLinkActive="active" (click)="onLogout()">Logout</button>
         } @else {
             <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
         }

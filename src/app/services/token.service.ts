@@ -9,6 +9,10 @@ export class TokenService {
   isAuthentication: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
       false
   );
+
+  isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+      false
+  );
   constructor() {
     const token = this.getToken();
     if (token) {
