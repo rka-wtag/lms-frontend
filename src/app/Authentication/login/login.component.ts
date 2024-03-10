@@ -4,6 +4,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {NgIf} from "@angular/common";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 
 @Component({
     selector: 'app-login',
@@ -14,6 +15,9 @@ import {HttpErrorResponse} from "@angular/common/http";
         RouterLinkActive,
         NgIf,
         ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatError
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
@@ -24,7 +28,7 @@ export class LoginComponent {
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
         this.loginForm = this.fb.group({
             username: new FormControl('', [Validators.required]),
-            password: new FormControl('', [Validators.required]),
+            password: new FormControl('', [Validators.required, Validators.minLength(6)]),
         });
     }
 
@@ -32,10 +36,9 @@ export class LoginComponent {
         if (this.loginForm.valid) {
             this.authService.onLogin(this.loginForm.value).subscribe({
                 next: () => {
-                    this.router.navigate(['home']);
+                    this.router.navigate(['showBooks']);
                 },
                 error: (err) => {
-                    console.log(err);
                     this.handleError(err);
                 }
             });
@@ -48,10 +51,9 @@ export class LoginComponent {
         this.router.navigate(['register'])
     }
 
-    private handleError(err: any): void {
-        if (err.status === 'BAD_REQUEST') {
-            this.loginForm.setErrors({"badCredentials": true, "badCredentialsMessage": err.message});
-            console.log(this.loginForm.errors);
+    private handleError(err: HttpErrorResponse): void {
+        if (err.status === 400) {
+            this.loginForm.setErrors({"badCredentials": true, "badCredentialsMessage": err.error.errorMessage});
         }
     }
 }
