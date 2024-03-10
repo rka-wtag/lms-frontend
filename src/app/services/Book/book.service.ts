@@ -22,5 +22,13 @@ export class BookService {
             })
         );
   }
+
+  deleteBook(id: number) {
+      return this.http.delete(apiEndpoint.BookEndpoint.getDeleteBook(id))
+          .pipe(
+              catchError(err => throwError(() => err))
+          )
+  }
+
 }
 

@@ -11,7 +11,11 @@ export const apiEndpoint = {
         logout: `${apiUrl}/logout`
     },
     BookEndpoint: {
-        book: `${apiUrl}/books`
+        book: `${apiUrl}/books`,
+        getDeleteBook: (id: number) => `${apiUrl}/books/${id}`
+    },
+    GenreEndpoint: {
+        genre: `${apiUrl}/genres`
     }
 };
 
@@ -21,3 +25,7 @@ export const Urls = {
     showAuthors: "/showAuthors",
     showIssuedBooks: "/showIssuedBooks",
 }
+
+export const regexPattern = {
+    number: {pattern: `/^[1-9]\\d*$/`}
+};

@@ -3,6 +3,7 @@
     <span class="spacer"></span>
     <div>
         @if (this.isAuthenticated$| async) {
+            <button mat-raised-button color="basic" (click)="saveBook()">Add Book</button>
             <button mat-button routerLink="/logout" routerLinkActive="active" (click)="onLogout()">Logout</button>
         } @else {
             <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
